@@ -1,0 +1,38 @@
+<html>
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){// DOM的onload事件处理函数
+    $("#submit").click(function(){// 当按钮submit被点击时的处理函数
+        postdata();// submit别点击时执行postdata函数
+    });
+});
+
+function postdata(){// 提交数据函数
+    $.ajax({// 调用jquery的ajax方法
+        type:"POST",// 设置ajax方法提交数据的形式
+        url:"/ajax",// 把数据提交到ok.php
+
+        /* 输入框writer中的值作为提交的数据，
+         * 必须使用key/value的形式，如"key=value"，
+         * 如果多个键值对，就使用&分隔开，
+         * 如"key1=value1&key2=value2" */
+        data: "username="+$("#username").val()+"&password="+$("#password").val(),
+        success:function(msg){// 提交成功后的回调，msg变量是ok.php输出的内容
+                    alert("数据提交成功");// 如果有必要，可以把msg变量的值显示到某个DIV元素中
+                    alert(msg);
+                }
+    });
+}
+</script>
+</head>
+
+<body>
+<form>
+
+    Username: <input type="text" id="username" name="username"/></br>
+    Password: <input type="text" id="password" name="password"/></br>
+
+    <input type="button" onclick="check(this.form)" id="submit" value="Submit"/>
+
+</form>
